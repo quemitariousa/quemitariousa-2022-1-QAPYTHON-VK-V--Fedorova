@@ -21,9 +21,8 @@ def config(request):
 @pytest.fixture(scope='function')
 def driver(config):
     url = config['url']
-    # browser = webdriver.Chrome(executable_path='C:\Program Files\Python39\chromedriver.exe')
     browser = webdriver.Chrome(ChromeDriverManager().install())
     browser.get(url)
     browser.set_window_size(1400, 1000)
     yield browser
-    browser.close()
+    browser.quit()
