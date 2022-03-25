@@ -9,12 +9,10 @@ from files import userdata
 import random
 import string
 
-
 CLICK_RETRY = 3
 
 
 class BaseCase:
-
     driver = None
     config = None
 
@@ -70,6 +68,8 @@ class BaseCase:
         self.click(base_page_locators.PROFILE_LOGIN_LOGOUT)
         WebDriverWait(self.driver, timeout=2).until(EC.url_changes(current_url))
 
-    def randStr(self, chars=string.ascii_uppercase + string.digits, N=10):
-        return ''.join(random.choice(chars) for _ in range(N))
-
+    def randStr(self, chars=string.ascii_uppercase + string.digits, N=10, digist=False):
+        if digist:
+            return ''.join(random.choice(string.digits) for _ in range(N))
+        else:
+            return ''.join(random.choice(chars) for _ in range(N))
