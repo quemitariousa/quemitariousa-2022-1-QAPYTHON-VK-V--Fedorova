@@ -4,7 +4,7 @@ import time
 import allure
 
 from files import userdata
-from ui.locators import base_locators
+from ui.locators.base_locators import BasePageLocators
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
@@ -21,7 +21,7 @@ CLICK_RETRY = 5
 
 
 class BasePage(object):
-    locators = base_locators.BasePageLocators()  # ? разобраться с локаторами
+    locators = BasePageLocators
     url = 'https://target.my.com/'
 
     def __init__(self, driver):
@@ -44,7 +44,7 @@ class BasePage(object):
         return self.wait(timeout).until(EC.presence_of_element_located(locator))
 
     @allure.step('Click on an element...')
-    def click(self, locator, timeout=None) -> WebElement:
+    def click(self, locator, timeout=5) -> WebElement:
         self.find(locator, timeout=timeout)
         elem = self.wait(timeout).until(EC.element_to_be_clickable(locator))
         elem.click()

@@ -26,16 +26,14 @@ class LoginPage(BasePage):
     @allure.step("Try to negative log in...")
     def negative_auth(self, login, password):
         self.click(self.locators.PROFILE_LOGIN)
-        email_input = self.find(self.locators.EMAIL_INPUT)
-        password_input = self.find(self.locators.PASSWORD_INPUT)
-        email_input.send_keys(login)
-        password_input.send_keys(password)
+        self.find(self.locators.EMAIL_INPUT)
+        self.send_value(self.locators.EMAIL_INPUT, login)
+        self.find(self.locators.PASSWORD_INPUT)
+        self.send_value(self.locators.PASSWORD_INPUT, password)
         self.click(self.locators.LOGIN_BUTTON)
 
     def logout(self):
         current_url = self.driver.current_url
-        time.sleep(1)
         self.click(self.locators.LOGIN_OUT)
         self.click(self.locators.PROFILE_LOGIN_LOGOUT)
-        time.sleep(4)
         WebDriverWait(self.driver, timeout=2).until(EC.url_changes(current_url))

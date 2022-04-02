@@ -17,7 +17,7 @@ class Test(BaseCase):
     @pytest.mark.UI
     def test_login_wrong_email(self, login_page):
         login_page.negative_auth('yatakustala@gmail.com', 'heyhey')
-        assert self.driver.current_url != "https://target.my.com/dashboard"
+        assert "https://account.my.com/login/?error_code" in self.driver.current_url
 
     @allure.epic('UI tests')
     @allure.feature('Company')
