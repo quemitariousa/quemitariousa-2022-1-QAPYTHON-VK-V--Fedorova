@@ -6,7 +6,7 @@ class BasePageLocators(object):
     EMAIL_INPUT = (By.NAME, 'email')
     PASSWORD_INPUT = (By.NAME, 'password')
     LOGIN_BUTTON = (By.XPATH, '//div[contains(@class, "authForm-module-button") and contains(text(), "Войти")]')
-
+    SPINNER = (By.XPATH, '//div[@class="spinner spinner_large"]')
 
 class LoginPageLocators(BasePageLocators):
     PROFILE_LOGIN = (By.XPATH, '//div[contains(text(), "Войти")]')
@@ -46,36 +46,31 @@ class CompanyPageLocators(BasePageLocators):
     CREATE_NEW_COMPANY = (By.XPATH, '//div[contains(text(), "Создать кампанию")]')
     NEW_COMPANY_TRAFFIC = (By.XPATH, '//div[contains(@class, "column-list-item _traffic")]')
     INPUT_URL = (By.XPATH, '//input[contains(@placeholder, "Введите ссылку")]')
-    FORMAT_COMPANY = (By.XPATH, '//div[contains(@cid, "view734")]')
-    NAME_COMPANY = (By.XPATH, '//div[contains(@class, "input input_campaign-name input_with-close")]/descendant::input')
+    FORMAT_COMPANY = (By.XPATH, '//div[contains(@id, "patterns_banner_4")]')
+    NAME_COMPANY = (By.XPATH, './/div[contains(@class, "input_campaign-name")]/descendant::input')
     INPUT_BUDGET_PER_DAY = (By.XPATH, '//div[contains(@class, "js-budget-setting-daily")]/descendant::input')
     INPUT_BUDGET_ALL = (By.XPATH, '//div[contains(@class, "budget-setting__input-wrap '
                                   'js-budget-setting-total")]/descendant::input')
-    UPLOAD_PICTURE = (By.XPATH, '//div[contains(@class, "bannerForm-module-roleInline-uMDG0M")]/descendant::input')
+    UPLOAD_PICTURE = (By.XPATH, '//div[contains(@class, "bannerForm-module-roleInline")]/descendant::input')
     SAVE_UPLOAD_PICTURE = (By.XPATH, '//input[contains(@class, "image-cropper__save js-save")]')
     SAVE_COMPANY = (By.XPATH, '//div[contains(text(), "Создать кампанию")]/parent::button')
     MY_COMPANY_NAME_IN_LIST = ()
     TEST_FILE_INPUT = (By.XPATH, '//input[contains(@type, "file") and contains(@data-test, "image_240x400")]')
-    TEST_FILE_CLICK = (By.XPATH,
-                       '//div[contains(@class, "roles-module-uploadButton-ZO1MPT button-module-gray-3HQmGm '
-                       'button-module-button-1v2gG_")]')
+    TEST_FILE_CLICK = (By.XPATH, './/input[@type="file" and @data-test="image_240x400"]')
 
 
 class SegmentLocators(object):
     CREATE_FIRST_SEGMENT = (By.XPATH, '//a[contains(@href, "/segments/segments_list/new/")]')
     CREATE_SECOND_SEGMENT = (By.XPATH, "//div[contains(@class, 'button__text')]")
-    CREATE_NEW_SEGMENT = (By.XPATH, '//button[contains(@class, "button button_submit")]')
-    APPS_AND_GAMES_SEGMENT = (By.XPATH, '//div[@class="adding-segments-modal__block-left js-sources-types"] //div['
-                                        'contains(text(),"Приложения и игры")]')
-    PLAYED_AND_PAYED_BUTTON = (By.XPATH, '//input[@class = "adding-segments-source__checkbox js-main-source-checkbox"]')
-    SAVE_NEW_SEGMENT = (By.XPATH, '//button[@class="button button_submit"]//div[contains(text(),"Добавить сегмент")]')
-    INPUT_NAME_SEGMENT = (By.XPATH, '//div[@class="input input_create-segment-form"]//input')
+    CREATE_NEW_SEGMENT = (By.XPATH, '//button[contains(@class, "button_submit")]')
+    APPS_AND_GAMES_SEGMENT = (By.XPATH, './/div[contains(text(), "Приложения и игры в соцсетях")]')
+    PLAYED_AND_PAYED_BUTTON = (By.XPATH, './/input[contains(@class, "adding-segments-source__checkbox ")]')
+    SAVE_NEW_SEGMENT = (By.XPATH, './/div[@class="button__text" and contains(text(), "Добавить сегмент")]')
+    INPUT_NAME_SEGMENT = (By.XPATH, './/div[@class="js-segment-name"]//input')
     SUBMIT_SEGMENT = (By.XPATH, "//div[@class='create-segment-form']//div[contains(text(),'Создать сегмент')]")
     MY_SEGMENT_NAME_IN_LIST = ()
 
     SEARCH_OF_SEGMENTS = (By.XPATH, '//input[@placeholder="Поиск по названию или id..."]')
-    DELETE_SEGMENT = (By.XPATH, "//div[@class='main-module-Cell-Z2qWrE']/descendant::span")
-    CONFIRM_DELETE_SEGMENT = (By.XPATH, "//button[@class='button button_confirm-remove button_general']/div")
     CHECKBOX_ALL_DELETE = (
         By.XPATH, "//div[@class='segmentsTable-module-idHeaderCellWrap-1M1sHd']//input[@type='checkbox']")
     ACTION_LIST = (By.XPATH, '//span[contains(text(), "Действия")]')
