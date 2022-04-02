@@ -17,6 +17,3 @@ class BaseCase:
         self.logger = logger
 
         self.base_page: BasePage = (request.getfixturevalue('base_page'))
-
-
-        self.logger.debug('Zaveloc!')
