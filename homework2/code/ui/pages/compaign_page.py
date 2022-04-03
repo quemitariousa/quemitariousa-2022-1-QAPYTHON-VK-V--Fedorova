@@ -51,4 +51,4 @@ class CompaignPage(BasePage):
         self.click(self.locators.SAVE_СOMPAIGN)
         WebDriverWait(self.driver, timeout=10).until(
             lambda d: self.driver.current_url == "https://target.my.com/dashboard#")
-        self.locators.MY_СOMPAIGN_NAME_IN_LIST = (By.XPATH, f"//*[contains(text(), '{name_compaign}')]")
+        self.locators.MY_COMPAIGN_NAME_IN_LIST = (By.XPATH, f"//*[contains(text(), '{name_compaign}')]")

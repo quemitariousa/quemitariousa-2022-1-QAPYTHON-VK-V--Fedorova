@@ -8,6 +8,7 @@ class BasePageLocators(object):
     LOGIN_BUTTON = (By.XPATH, '//div[contains(@class, "authForm-module-button") and contains(text(), "Войти")]')
     SPINNER = (By.XPATH, '//div[@class="spinner spinner_large"]')
 
+
 class LoginPageLocators(BasePageLocators):
     PROFILE_LOGIN = (By.XPATH, '//div[contains(text(), "Войти")]')
     EMAIL_INPUT = (By.NAME, 'email')
@@ -27,7 +28,7 @@ class DashboardPageLocators(BasePageLocators):
                                       '"/logout")]')
 
 
-class CompaignPageLocators(BasePageLocators):
+class CompaignPageLocators(object):
     PROFILE = (By.XPATH, '//a[contains(text(), "Профиль")]')
     СOMPAIGN = (By.XPATH, '//a[contains(text(), "Кампании")]')
     AUDIENCE = (By.XPATH, '//a[contains(text(), "Аудитории")]')
@@ -36,7 +37,7 @@ class CompaignPageLocators(BasePageLocators):
                                       '"/logout")]')
 
     START_LOGIN_BUTTON = (By.XPATH, '//div[contains(@class, "responseHead-module-button")]')
-
+    MY_COMPAIGN_NAME_IN_LIST = ()
     PROFILE_NAME_INPUT = (By.XPATH, '//div[contains(@class, "js-contacts-field-name")]/descendant::input')
     PROFILE_PHONE_INPUT = (By.XPATH, '//div[contains(@class, "js-contacts-field-phone")]/descendant::input')
     PROFILE_EMAIL_INPUT = (By.XPATH, '//div[contains(@class, "js-additional-email")]/descendant::input')
@@ -54,7 +55,6 @@ class CompaignPageLocators(BasePageLocators):
     UPLOAD_PICTURE = (By.XPATH, '//div[contains(@class, "bannerForm-module-roleInline")]/descendant::input')
     SAVE_UPLOAD_PICTURE = (By.XPATH, '//input[contains(@class, "image-cropper__save js-save")]')
     SAVE_СOMPAIGN = (By.XPATH, '//div[contains(text(), "Создать кампанию")]/parent::button')
-    MY_СOMPAIGN_NAME_IN_LIST = ()
     TEST_FILE_INPUT = (By.XPATH, '//input[contains(@type, "file") and contains(@data-test, "image_240x400")]')
     TEST_FILE_CLICK = (By.XPATH, './/input[@type="file" and @data-test="image_240x400"]')
 
