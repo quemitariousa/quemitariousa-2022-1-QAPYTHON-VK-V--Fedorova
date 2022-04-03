@@ -47,6 +47,7 @@ class SegmentPage(BasePage):
         self.locators.ELEMENT_OF_SEARCH_SEGMENTS = (
             By.XPATH, f"//li[@title='{name_of_segment}']"
         )
+        self.wait_find(self.locators.ELEMENT_OF_SEARCH_SEGMENTS)
         self.click(self.locators.ELEMENT_OF_SEARCH_SEGMENTS)
         self.click(self.locators.CHECKBOX_ALL_DELETE)
         self.click(self.locators.ACTION_LIST)

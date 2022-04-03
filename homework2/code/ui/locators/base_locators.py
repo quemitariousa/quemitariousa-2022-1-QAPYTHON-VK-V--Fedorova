@@ -27,9 +27,9 @@ class DashboardPageLocators(BasePageLocators):
                                       '"/logout")]')
 
 
-class CompanyPageLocators(BasePageLocators):
+class CompaignPageLocators(BasePageLocators):
     PROFILE = (By.XPATH, '//a[contains(text(), "Профиль")]')
-    COMPANY = (By.XPATH, '//a[contains(text(), "Кампании")]')
+    СOMPAIGN = (By.XPATH, '//a[contains(text(), "Кампании")]')
     AUDIENCE = (By.XPATH, '//a[contains(text(), "Аудитории")]')
     LOGIN_OUT = (By.XPATH, '//div[contains(@class, "right-module-rightWrap")]')
     PROFILE_LOGIN_LOGOUT = (By.XPATH, '//a[contains(@class, "rightMenu-module-rightMenuLink") and contains(@href, '
@@ -43,18 +43,18 @@ class CompanyPageLocators(BasePageLocators):
     PROFILE_SAVE = (By.XPATH, '//button[contains(@class, "button_submit")]')
 
     AUDIENCE = (By.XPATH, '//a[contains(text(), "Аудитории")]')
-    CREATE_NEW_COMPANY = (By.XPATH, '//div[contains(text(), "Создать кампанию")]')
-    NEW_COMPANY_TRAFFIC = (By.XPATH, '//div[contains(@class, "column-list-item _traffic")]')
+    CREATE_NEW_СOMPAIGN = (By.XPATH, '//div[contains(text(), "Создать кампанию")]')
+    NEW_СOMPAIGN_TRAFFIC = (By.XPATH, '//div[contains(@class, "column-list-item _traffic")]')
     INPUT_URL = (By.XPATH, '//input[contains(@placeholder, "Введите ссылку")]')
-    FORMAT_COMPANY = (By.XPATH, '//div[contains(@id, "patterns_banner_4")]')
-    NAME_COMPANY = (By.XPATH, './/div[contains(@class, "input_campaign-name")]/descendant::input')
+    FORMAT_СOMPAIGN = (By.XPATH, '//div[contains(@id, "patterns_banner_4")]')
+    NAME_СOMPAIGN = (By.XPATH, './/div[contains(@class, "input_campaign-name")]/descendant::input')
     INPUT_BUDGET_PER_DAY = (By.XPATH, '//div[contains(@class, "js-budget-setting-daily")]/descendant::input')
     INPUT_BUDGET_ALL = (By.XPATH, '//div[contains(@class, "budget-setting__input-wrap '
                                   'js-budget-setting-total")]/descendant::input')
     UPLOAD_PICTURE = (By.XPATH, '//div[contains(@class, "bannerForm-module-roleInline")]/descendant::input')
     SAVE_UPLOAD_PICTURE = (By.XPATH, '//input[contains(@class, "image-cropper__save js-save")]')
-    SAVE_COMPANY = (By.XPATH, '//div[contains(text(), "Создать кампанию")]/parent::button')
-    MY_COMPANY_NAME_IN_LIST = ()
+    SAVE_СOMPAIGN = (By.XPATH, '//div[contains(text(), "Создать кампанию")]/parent::button')
+    MY_СOMPAIGN_NAME_IN_LIST = ()
     TEST_FILE_INPUT = (By.XPATH, '//input[contains(@type, "file") and contains(@data-test, "image_240x400")]')
     TEST_FILE_CLICK = (By.XPATH, './/input[@type="file" and @data-test="image_240x400"]')
 

@@ -7,7 +7,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from ui.pages.base_page import BasePage
 from ui.pages.login_page import LoginPage
 
-from ui.pages.company_page import CompanyPage
+from ui.pages.compaign_page import CompaignPage
 from ui.pages.segments_page import SegmentPage
 
 
@@ -22,7 +22,7 @@ def login_page(driver):
 
 
 @pytest.fixture()
-def company_page(driver, login_page):
+def compaign_page(driver, login_page):
     return login_page.auth()
 
 
