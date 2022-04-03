@@ -9,7 +9,7 @@ from ui.fixtures import *
 
 @pytest.fixture(scope='function')
 def temp_dir(base_temp_dir, request):
-    temp_dir = os.path.join(base_temp_dir, request._pyfuncitem.nodeid.replace("::", "_"))
+    temp_dir = os.path.join(request.config.base_temp_dir, request._pyfuncitem.nodeid.replace("::", "_"))
     os.makedirs(temp_dir)
     return temp_dir
 
