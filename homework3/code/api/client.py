@@ -66,7 +66,7 @@ class ApiClient:
 
         return csrf_token
 
-    # target_авторизация господи ради бога заработай я болею и устала
+    # target_авторизация
     def post_login_target(self):
         url = 'https://auth-ac.my.com/auth?lang=ru&nosavelogin=0'
 
