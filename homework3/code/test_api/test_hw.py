@@ -7,7 +7,7 @@ class TestApi(BaseApi):
     def test_valid_login(self):
         self.api_client.post_login_target()
         answer = self.api_client._request('GET', location='https://target.my.com/profile/contacts', jsonify=False)
-        assert answer.status_code is 200
+        assert answer.status_code == 200
 
     @pytest.mark.API
     def test_create_campaign(self):
