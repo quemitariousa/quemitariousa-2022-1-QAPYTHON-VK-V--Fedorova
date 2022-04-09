@@ -26,7 +26,7 @@ class SegmentPage(BasePage):
             lambda d: self.driver.current_url == "https://target.my.com/segments/segments_list")
         time.sleep(2)
         self.locators.MY_SEGMENT_NAME_IN_LIST = (
-            By.XPATH, f"//div[@class='cells-module-nameCell-zlAsWX'] // a[@title='{name_segment}']")
+            By.XPATH, f"//div//a[@title='{name_segment}']")
         return name_segment
 
     @allure.step("Delete segment...")
