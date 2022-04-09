@@ -28,7 +28,7 @@ class DashboardPageLocators(BasePageLocators):
                                       '"/logout")]')
 
 
-class CompaignPageLocators(object):
+class CampaignPageLocators(object):
     PROFILE = (By.XPATH, '//a[contains(text(), "Профиль")]')
     СOMPAIGN = (By.XPATH, '//a[contains(text(), "Кампании")]')
     AUDIENCE = (By.XPATH, '//a[contains(text(), "Аудитории")]')
@@ -37,7 +37,7 @@ class CompaignPageLocators(object):
                                       '"/logout")]')
 
     START_LOGIN_BUTTON = (By.XPATH, '//div[contains(@class, "responseHead-module-button")]')
-    MY_COMPAIGN_NAME_IN_LIST = ()
+    MY_CAMPAIGN_NAME_IN_LIST = ()
     PROFILE_NAME_INPUT = (By.XPATH, '//div[contains(@class, "js-contacts-field-name")]/descendant::input')
     PROFILE_PHONE_INPUT = (By.XPATH, '//div[contains(@class, "js-contacts-field-phone")]/descendant::input')
     PROFILE_EMAIL_INPUT = (By.XPATH, '//div[contains(@class, "js-additional-email")]/descendant::input')
@@ -59,7 +59,7 @@ class CompaignPageLocators(object):
     TEST_FILE_CLICK = (By.XPATH, './/input[@type="file" and @data-test="image_240x400"]')
 
 
-class SegmentLocators(object):
+class SegmentPageLocators(object):
     CREATE_FIRST_SEGMENT = (By.XPATH, '//a[contains(@href, "/segments/segments_list/new/")]')
     CREATE_SECOND_SEGMENT = (By.XPATH, "//div[contains(@class, 'button__text')]")
     CREATE_NEW_SEGMENT = (By.XPATH, '//button[contains(@class, "button_submit")]')

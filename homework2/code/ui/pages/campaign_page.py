@@ -3,7 +3,7 @@ import os
 import allure
 from selenium.webdriver.common.by import By
 
-from ui.locators.base_locators import CompaignPageLocators
+from ui.locators.base_locators import CampaignPageLocators
 
 from ui.pages.base_page import BasePage
 from ui.pages.segments_page import SegmentPage
@@ -19,8 +19,8 @@ def get_banner():
     return os.path.join(banner_path, "images", "picture.png")
 
 
-class CompaignPage(BasePage):
-    locators = CompaignPageLocators
+class CampaignPage(BasePage):
+    locators = CampaignPageLocators
     url = 'https://target.my.com/dashboard'
 
     def go_to_segments_page(self):
@@ -28,9 +28,9 @@ class CompaignPage(BasePage):
         time.sleep(1)
         return SegmentPage(self.driver)
 
-    @allure.step('Creating compaign...')
+    @allure.step('Creating campaign...')
     def create_campaign(self):
-        name_compaign = self.randStr()
+        name_campaign = self.randStr()
         self.click(self.locators.CREATE_NEW_СOMPAIGN)
         WebDriverWait(self.driver, timeout=5).until(EC.url_changes("https://target.my.com/dashboard"))
         self.click(self.locators.NEW_СOMPAIGN_TRAFFIC)
@@ -38,7 +38,7 @@ class CompaignPage(BasePage):
         WebDriverWait(self.driver, timeout=6).until(
             EC.element_to_be_clickable(self.locators.INPUT_BUDGET_PER_DAY)
         )
-        self.send_value(self.locators.NAME_СOMPAIGN, name_compaign)
+        self.send_value(self.locators.NAME_СOMPAIGN, name_campaign)
         self.send_value(self.locators.INPUT_BUDGET_PER_DAY, "10000")
         self.send_value(self.locators.INPUT_BUDGET_ALL, "100500")
 
@@ -51,4 +51,4 @@ class CompaignPage(BasePage):
         self.click(self.locators.SAVE_СOMPAIGN)
         WebDriverWait(self.driver, timeout=10).until(
             lambda d: self.driver.current_url == "https://target.my.com/dashboard#")
-        self.locators.MY_COMPAIGN_NAME_IN_LIST = (By.XPATH, f"//*[contains(text(), '{name_compaign}')]")
+        self.locators.MY_CAMPAIGN_NAME_IN_LIST = (By.XPATH, f"//*[contains(text(), '{name_campaign}')]")

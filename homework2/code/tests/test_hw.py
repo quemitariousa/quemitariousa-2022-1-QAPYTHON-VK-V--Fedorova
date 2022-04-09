@@ -23,9 +23,9 @@ class Test(BaseCase):
     @allure.feature('Company')
     @allure.title('Test create company')
     @pytest.mark.UI
-    def test_create_campaign(self, compaign_page):
-        compaign_page.create_campaign()
-        assert compaign_page.wait_find(compaign_page.locators.MY_COMPAIGN_NAME_IN_LIST)
+    def test_create_campaign(self, campaign_page):
+        campaign_page.create_campaign()
+        assert campaign_page.wait_find(campaign_page.locators.MY_CAMPAIGN_NAME_IN_LIST)
 
     @allure.epic('UI tests')
     @allure.feature('Segment')

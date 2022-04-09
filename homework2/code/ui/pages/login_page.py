@@ -1,15 +1,14 @@
 import allure
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-import time
 from ui.locators.base_locators import LoginPageLocators
 from ui.pages.base_page import BasePage
-from ui.pages.compaign_page import CompaignPage
+from ui.pages.campaign_page import CampaignPage
 from files import userdata
 
 
 class LoginPage(BasePage):
-    locators = LoginPageLocators()
+    locators = LoginPageLocators
     url = 'https://target.my.com/'
     LOGIN = userdata.login
     PASSWORD = userdata.password
@@ -21,7 +20,7 @@ class LoginPage(BasePage):
         self.send_value(self.locators.PASSWORD_INPUT, userdata.password)
         self.click(self.locators.LOGIN_BUTTON)
         WebDriverWait(self.driver, timeout=2).until(EC.url_changes("https://target.my.com"))
-        return CompaignPage(self.driver)
+        return CampaignPage(self.driver)
 
     @allure.step("Try to negative log in...")
     def negative_auth(self, login, password):

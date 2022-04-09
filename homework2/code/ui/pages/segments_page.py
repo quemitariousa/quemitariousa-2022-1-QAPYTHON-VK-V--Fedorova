@@ -1,6 +1,6 @@
 import allure
 
-from ui.locators import base_locators
+from ui.locators.base_locators import SegmentPageLocators
 from ui.pages.base_page import BasePage
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,7 +9,7 @@ from ui.locators.base_locators import By
 
 
 class SegmentPage(BasePage):
-    locators = base_locators.SegmentLocators()
+    locators = SegmentPageLocators
     url = 'https://target.my.com/segments/segments_list'
 
     @allure.step("Create segment...")
