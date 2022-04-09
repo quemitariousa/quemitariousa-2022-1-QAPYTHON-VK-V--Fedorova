@@ -72,6 +72,6 @@ class SegmentPageLocators(object):
 
     SEARCH_OF_SEGMENTS = (By.XPATH, '//input[@placeholder="Поиск по названию или id..."]')
     CHECKBOX_ALL_DELETE = (
-        By.XPATH, "//div[@class='segmentsTable-module-idHeaderCellWrap-1M1sHd']//input[@type='checkbox']")
+        By.XPATH, '//div[contains(@class, "segmentsTable-module-idHeaderCellWrap")]//input[@type="checkbox"]')
     ACTION_LIST = (By.XPATH, '//span[contains(text(), "Действия")]')
     ACTION_LIST_DELETE = (By.XPATH, '//li[contains(text(), "Удалить")]')
