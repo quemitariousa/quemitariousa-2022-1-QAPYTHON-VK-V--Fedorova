@@ -24,7 +24,7 @@ class SegmentPage(BasePage):
         self.click(self.locators.SUBMIT_SEGMENT)
         WebDriverWait(self.driver, timeout=3).until(
             lambda d: self.driver.current_url == "https://target.my.com/segments/segments_list")
-        time.sleep(2)
+        WebDriverWait(self.driver, timeout=10).until(EC.element_to_be_clickable(self.locators.CREATE_SECOND_SEGMENT))
         self.locators.MY_SEGMENT_NAME_IN_LIST = (
             By.XPATH, f"//div//a[@title='{name_segment}']")
         return name_segment
