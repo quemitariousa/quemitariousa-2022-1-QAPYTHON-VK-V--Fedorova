@@ -35,11 +35,11 @@ class Top10MostFrequentRequestsModel(Base):
     def __repr__(self):
         return f"Top 10 most frequent requests: {self.id_top_10_most_frequent_requests}" \
                f"Url: {self.url_requests}" \
-               f"Count: {self.count_requests}"
+               f"Count: {self.lines}"
 
     id_top_10_most_frequent_requests = Column(Integer, primary_key=True, autoincrement=True)
-    url_requests = Column(String(250), nullable=False)
-    count_requests = Column(Integer)
+    url_requests = Column(String(1000), nullable=False)
+    lines = Column(Integer)
 
 
 class TopClientErrorsModel(Base):
