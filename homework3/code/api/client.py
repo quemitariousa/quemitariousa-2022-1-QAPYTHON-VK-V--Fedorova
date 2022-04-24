@@ -161,7 +161,7 @@ class ApiClient:
         return response
 
     def post_create_picture(self):
-        file = open("../homework3/code/files/picture.jpg", "rb")
+        file = open("homework3/code/files/picture.jpg", "rb")
         file = {"file": file}
         location = "https://target.my.com/api/v2/content/static.json"
         headers = {
