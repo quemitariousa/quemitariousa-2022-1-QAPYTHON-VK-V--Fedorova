@@ -1,7 +1,6 @@
 import random
 import string
 import pytest
-
 from utils.builder import Builder
 
 

@@ -1,6 +1,7 @@
 import logging
 import requests
 from files import userdata
+
 logger = logging.getLogger('test')
 
 MAX_RESPONSE_LENGTH = 300
@@ -20,8 +21,7 @@ class ResponseStatusCodeException(Exception):
 
 class ApiClient:
 
-    def __init__(self, base_url, user, password):
-        self.base_url = base_url
+    def __init__(self, user, password):
         self.user = user
         self.password = password
 
@@ -66,7 +66,6 @@ class ApiClient:
 
         return csrf_token
 
-    # target_авторизация господи ради бога заработай я болею и устала
     def post_login_target(self):
         url = 'https://auth-ac.my.com/auth?lang=ru&nosavelogin=0'
 
@@ -90,9 +89,8 @@ class ApiClient:
     def post_create_segment(self, name, pass_condition=1, object_type='remarketing_player', left=365, right=0,
                             seg_type='positive'):
         location = "https://target.my.com/api/v2/remarketing/segments.json"
-        print(self.csrf_token)
-        headers = {'Referer': 'https://target.my.com/segments/segments_list/new/',
-                   'X-CSRFToken': self.csrf_token}
+        headers = {
+            'X-CSRFToken': self.csrf_token}
         data = {
             "name": f"{name}",
             "pass_condition": pass_condition,
@@ -101,21 +99,20 @@ class ApiClient:
         response = self.session.post(url=location, headers=headers, json=data)
         response_data = response.json()
         segment_id = response_data['id']
-        print(segment_id)
         return response, segment_id
 
     def open_segment(self, segment_id):
         url = "https://target.my.com/api/v2/remarketing/segments.json?limit=100"
 
         headers = {
-            'Referer': 'https://target.my.com/segments/segments_list',
-            'X-Requested-With': 'XMLHttpRequest',
+            'X-Requested-With': 'XMLHttpRequest'
         }
 
         params = {'id': segment_id}
 
         response = self._request('GET', location=url, headers=headers, params=params)
-        return response
+        segment_id = response['items'][-1]['id']
+        return response, segment_id
 
     def delete_segment(self, segment_id):
         url = "https://target.my.com/api/v1/remarketing/mass_action/delete.json"
@@ -128,14 +125,20 @@ class ApiClient:
         result = self.session.post(url=url, headers=headers, json=data)
         return result
 
-    def post_create_campaign(self, name, image_id=10259832, url_id=62507943, objective='reach',
+    def post_create_campaign(self, name, objective='reach',
                              package_id=960):
-        location = "https://target.my.com/api/v2/campaigns.json"
-        headers = {"Referer": 'https://target.my.com/campaign/new',
-                   "X-CSRFToken": self.csrf_token}
 
+        response_picture = self.post_create_picture().json()
+        id_picture = response_picture['id']
+
+        location = "https://target.my.com/api/v2/campaigns.json"
+        headers = {
+            "X-CSRFToken": self.csrf_token}
+
+        # !!!
         data = {
-            "banners": [{"content": {"image_240x400": {"id": image_id}}, "urls": {"primary": {"id": url_id}}}],
+            "banners": [{"content": {"image_240x400": {"id": id_picture}},
+                         "urls": {"primary": {"id": id_picture}}}],
             "name": name,
             "objective": objective,
             "package_id": package_id,
@@ -144,16 +147,30 @@ class ApiClient:
         }
         response = self.session.post(url=location, headers=headers, json=data)
         response_data = response.json()
-        compaign_id = response_data['id']
-        print(compaign_id)
-        return response, compaign_id
+        campaign_id = response_data['id']
+        return response, campaign_id
 
-    def post_delete_compaign(self, compaign_id, status="deleted"):
+    def post_delete_compaign(self, campaign_id, status="deleted"):
         location = "https://target.my.com/api/v2/campaigns/mass_action.json"
-        headers = {"Referer": 'https://target.my.com/dashboard',
-                   "X-CSRFToken": self.csrf_token
-                   }
+        headers = {
+            "X-CSRFToken": self.csrf_token
+        }
 
-        data = [{"id": compaign_id, "status": status}]
+        data = [{"id": campaign_id, "status": status}]
         response = self.session.post(url=location, headers=headers, json=data)
+        return response
+
+    def post_create_picture(self):
+        file = open("../files/picture.jpg", "rb")
+        file = {"file": file}
+        location = "https://target.my.com/api/v2/content/static.json"
+        headers = {
+            "X-CSRFToken": self.csrf_token
+        }
+        response = self.session.post(url=location, headers=headers, files=file)
+        return response
+
+    def check_campaign_id(self, campaign_id):
+        url = f"https://target.my.com/api/v2/campaigns/{campaign_id}.json"
+        response = self.session.get(url=url).json()
         return response
