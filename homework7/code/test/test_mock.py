@@ -28,8 +28,6 @@ class TestDelete:
     def test_delete_user(self, mock_client):
         resp = mock_client.delete_user("Lena")
         assert resp[0].split(' ')[1] == '200'
-
-    def test_delete_not_user(self, mock_client):
         resp = mock_client.delete_user("Lena")
         assert resp[0].split(' ')[1] == '404'
 
@@ -39,7 +37,5 @@ class TestPost:
     def test_post_user(self, mock_client):
         resp = mock_client.create_user('Mishanya', 4)
         assert resp[0].split(' ')[1] == '200'
-
-    def test_post_not_user(self, mock_client):
         resp = mock_client.create_user('Mishanya', 4)
         assert resp[0].split(' ')[1] == '400'
