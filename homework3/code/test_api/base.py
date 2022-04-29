@@ -1,5 +1,7 @@
 import random
 import string
+import uuid
+
 import pytest
 from utils.builder import Builder
 
@@ -17,9 +19,7 @@ class BaseApi:
         if self.authorize:
             self.api_client.post_login_target()
 
-    def randStr(self, chars=string.ascii_uppercase + string.digits, N=10, digist=False):
-        if digist:
-            return ''.join(random.choice(string.digits) for _ in range(N))
-        else:
-            return ''.join(random.choice(chars) for _ in range(N))
+    def randStr(self):
+        namespace = uuid.NAMESPACE_URL
+        return str(namespace)
 
