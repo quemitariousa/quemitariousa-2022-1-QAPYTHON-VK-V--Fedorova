@@ -1,6 +1,8 @@
+import os
 from dataclasses import dataclass
 
 import faker
+import pytest
 
 fake = faker.Faker()
 
