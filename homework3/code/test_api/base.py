@@ -3,7 +3,7 @@ import string
 import uuid
 
 import pytest
-from utils.builder import Builder
+from homework3.code.utils.builder import Builder
 
 
 class BaseApi:

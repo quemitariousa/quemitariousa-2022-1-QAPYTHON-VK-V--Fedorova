@@ -1,4 +1,4 @@
-from test_api.base import BaseApi
+from homework3.code.test_api.base import BaseApi
 import pytest
 
 class TestApi(BaseApi):
