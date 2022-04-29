@@ -1,9 +1,8 @@
+import os
 import pytest
-from selenium.webdriver.chrome import webdriver
-from files import userdata
-from api.client import ApiClient
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
+
+from homework3.code.api.client import ApiClient
+from homework3.code.files import userdata
 
 
 @pytest.fixture(scope='session')
@@ -15,3 +14,8 @@ def config(request):
 def api_client(config) -> ApiClient:
     api_client = ApiClient(user=userdata.login, password=userdata.password)
     return api_client
+
+
+@pytest.fixture(scope='session')
+def repo_root():
+    return os.path.abspath(os.path.join(__file__, os.path.pardir))

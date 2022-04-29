@@ -1,6 +1,11 @@
 import logging
+import os
+
+import faker
 import requests
-from files import userdata
+
+from homework3.code.files import userdata
+from homework3.code.utils.builder import fake
 
 logger = logging.getLogger('test')
 
@@ -17,6 +22,9 @@ class RespondErrorException(Exception):
 
 class ResponseStatusCodeException(Exception):
     pass
+
+
+fake = faker.Faker()
 
 
 class ApiClient:
@@ -125,20 +133,21 @@ class ApiClient:
         result = self.session.post(url=url, headers=headers, json=data)
         return result
 
-    def post_create_campaign(self, name, objective='reach',
+    def post_create_campaign(self, repo_root, name, objective='reach',
                              package_id=960):
 
-        response_picture = self.post_create_picture().json()
+        response_picture = self.post_create_picture(repo_root).json()
         id_picture = response_picture['id']
 
+        url_id = self.post_create_url_id(fake.url()).json()
+        url_id = url_id['id']
         location = "https://target.my.com/api/v2/campaigns.json"
         headers = {
             "X-CSRFToken": self.csrf_token}
 
-        # !!!
         data = {
             "banners": [{"content": {"image_240x400": {"id": id_picture}},
-                         "urls": {"primary": {"id": id_picture}}}],
+                         "urls": {"primary": {"id": url_id}}}],
             "name": name,
             "objective": objective,
             "package_id": package_id,
@@ -150,18 +159,17 @@ class ApiClient:
         campaign_id = response_data['id']
         return response, campaign_id
 
-    def post_delete_compaign(self, campaign_id, status="deleted"):
-        location = "https://target.my.com/api/v2/campaigns/mass_action.json"
+    def post_delete_compaign(self, campaign_id):
+        location = f"https://target.my.com/api/v2/campaigns/{campaign_id}.json"
         headers = {
             "X-CSRFToken": self.csrf_token
         }
-
-        data = [{"id": campaign_id, "status": status}]
-        response = self.session.post(url=location, headers=headers, json=data)
+        response = self.session.post(url=location, headers=headers)
         return response
 
-    def post_create_picture(self):
-        file = open("homework3/code/files/picture.jpg", "rb")
+    def post_create_picture(self, repo_root):
+        file = os.path.join(repo_root, 'files', 'picture.jpg')
+        file = open(file, "rb")
         file = {"file": file}
         location = "https://target.my.com/api/v2/content/static.json"
         headers = {
@@ -173,4 +181,12 @@ class ApiClient:
     def check_campaign_id(self, campaign_id):
         url = f"https://target.my.com/api/v2/campaigns/{campaign_id}.json"
         response = self.session.get(url=url).json()
+        return response
+
+    def post_create_url_id(self, target_url):
+        location = f"https://target.my.com/api/v1/urls/?url={target_url}"
+        headers = {
+            "X-CSRFToken": self.csrf_token
+        }
+        response = self.session.get(url=location, headers=headers)
         return response
