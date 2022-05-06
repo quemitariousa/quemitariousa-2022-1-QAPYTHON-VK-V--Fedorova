@@ -7,7 +7,7 @@ from homework6.mysql.models import Base
 
 class MysqlClient:
 
-    def __init__(self, db_name, user, password):
+    def __init__(self, db_name):
         self.user = 'root'
         self.port = 3306
         self.password = 'pass'

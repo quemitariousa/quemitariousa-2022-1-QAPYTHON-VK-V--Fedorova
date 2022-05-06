@@ -1,8 +1,8 @@
 import pytest
 
-from homework6.mysql.builder import MysqlBuilder
-from homework6.mysql.client import MysqlClient
-from homework6.mysql.models import *
+from mysql.builder import MysqlBuilder
+from mysql.client import MysqlClient
+from mysql.models import *
 
 
 class SQLBase:

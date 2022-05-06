@@ -1,4 +1,6 @@
-from homework6.mysql.models import *
+import os
+from conftest import repo_root
+from mysql.models import *
 
 
 class MysqlBuilder:
@@ -7,10 +9,11 @@ class MysqlBuilder:
         self.lines = self.get_lines()
 
     def get_lines(self):
-        with open('./access.log') as file:
-            lines = file.readlines()
-            lines = [line.split() for line in lines]
-            return lines
+        file = os.path.join(repo_root, 'files', 'access.log')
+        file = open(file, "rb")
+        lines = file.readlines()
+        lines = [line.split() for line in lines]
+        return lines
 
     def total_count(self):
         new_row = TotalCountModel(total_count=len(self.lines))
