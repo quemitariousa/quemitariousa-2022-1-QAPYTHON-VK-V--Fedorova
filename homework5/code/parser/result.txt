@@ -1,0 +1,10 @@
+Total Requests: 
+225133
+Total number of requests by type: 
+{'HEAD': 528, 'POST': 102503, 'GET': 122095, 'PUT': 6}
+Top 10 most frequent requests: 
+[('/administrator/index.php', 103939), ('/apache-log/access.log', 26336), ('/index.php', 7682), ('/', 6981), ('/templates/_system/css/general.css', 4980), ('/robots.txt', 3199), ('http://almhuette-raith.at/administrator/index.php', 2356), ('/favicon.ico', 2201), ('/wp-login.php', 1757), ('/administrator/', 1563)]
+Top 5 users by the number of requests that ended with a server (5XX) error: 
+[['189.217.45.73', 225], ['82.193.127.15', 4], ['91.210.145.36', 3], ['194.87.237.6', 2], ['198.38.94.207', 2]]
+TTop 5 largest requests that failed in a vlient (4XX) error: 
+[['/index.php', '404', '1417', '189.217.45.73'], ['//index.php', '404', '1397', '177.75.16.72'], ['/', '404', '1397', '81.17.16.116'], ['//index.php/component/users/', '404', '1397', '213.205.38.22'], ['//index.php/joomla-pages-ii/user-registration.html', '404', '1397', '213.205.38.22']]
