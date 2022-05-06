@@ -8,9 +8,9 @@ class MysqlBuilder:
         self.client = client
         self.lines = self.get_lines()
 
-    def get_lines(self):
-        file = os.path.join(repo_root, 'files', 'access.log')
-        file = open(file, "rb")
+    def get_lines(self, ):
+        file = os.path.join(repo_root(), 'files', 'access.log')
+        file = open(file, "r")
         lines = file.readlines()
         lines = [line.split() for line in lines]
         return lines
@@ -19,6 +19,7 @@ class MysqlBuilder:
         new_row = TotalCountModel(total_count=len(self.lines))
         self.client.session.add(new_row)
         self.client.session.commit()
+        return len(self.lines)
 
     def method_count(self):
         set_methods = set()
@@ -35,23 +36,23 @@ class MysqlBuilder:
 
         self.client.session.commit()
 
-    def top_10(self):
+    def top_most_frequent_requests(self, top):
         count = {}
         counter = 0
         for line in self.lines:
             count.update({line[6]: count.get(line[6], 0) + 1})
         for item in count.keys():
                 counter +=1
-                new_row = Top10MostFrequentRequestsModel(
+                new_row = TopMostFrequentRequestsModel(
                     lines=count.get(item),
                     url_requests=item
 
                 )
                 self.client.session.add(new_row)
-                if counter >= 10: break
+                if counter >= top: break
         self.client.session.commit()
 
-    def top_5xx(self):
+    def top_5xx(self, top):
         urls = []
         for line in self.lines:
             if line[8][0] == '5':
@@ -60,24 +61,25 @@ class MysqlBuilder:
                         if urls[k][0] == line[0]:
                             urls[k][1] += 1
                 else:
-                    urls.append([line[0], 1])
+                    urls.append([line[0], 1, line[8]])
 
-        for item in sorted(urls, key=lambda i: i[1], reverse=True)[:5]:
+        for item in sorted(urls, key=lambda i: i[1], reverse=True)[:top]:
             new_row = TopServerErrorsModel(
                 IP_server_error=item[0],
-                count_server_error=item[1]
+                count_server_error=item[1],
+                status_server_error=item[2]
 
             )
             self.client.session.add(new_row)
         self.client.session.commit()
 
-    def top_4xx(self):
+    def top_4xx(self, top):
         urls = []
         for line in self.lines:
             if line[8][0] == '4':
                 urls.append([line[6], line[8], line[9], line[0]])
 
-        for item in sorted(urls, key=lambda i: int(i[2]), reverse=True)[:5]:
+        for item in sorted(urls, key=lambda i: int(i[2]), reverse=True)[:top]:
             new_row = TopClientErrorsModel(
                 status_client_error=item[1],
                 size_client_error=item[2],
@@ -86,10 +88,3 @@ class MysqlBuilder:
             )
             self.client.session.add(new_row)
         self.client.session.commit()
-
-    def start(self):
-        self.top_10()
-        self.top_4xx()
-        self.top_5xx()
-        self.method_count()
-        self.total_count()

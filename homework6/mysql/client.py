@@ -2,15 +2,15 @@ import sqlalchemy
 from sqlalchemy import inspect
 from sqlalchemy.orm import sessionmaker
 
-from homework6.mysql.models import Base
+from mysql.models import Base
 
 
 class MysqlClient:
 
-    def __init__(self, db_name):
+    def __init__(self, db_name, user, password):
         self.user = 'root'
         self.port = 3306
-        self.password = 'pass'
+        self.password = '0000'
         self.host = '127.0.0.1'
         self.db_name = db_name
 
@@ -40,3 +40,4 @@ class MysqlClient:
     def create_table(self, table_name):
         if not inspect(self.engine).has_table(table_name):
             Base.metadata.tables[table_name].create(self.engine)
+

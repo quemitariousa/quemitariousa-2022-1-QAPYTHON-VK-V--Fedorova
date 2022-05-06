@@ -28,16 +28,16 @@ class TotalNumberOfRequestsByTypeModel(Base):
     requests_type = Column(String(412), nullable=False)
 
 
-class Top10MostFrequentRequestsModel(Base):
-    __tablename__ = 'Top10MostFrequentRequests'
+class TopMostFrequentRequestsModel(Base):
+    __tablename__ = 'TopMostFrequentRequests'
     __table_args__ = {'mysql_charset': 'utf8'}
 
     def __repr__(self):
-        return f"Top 10 most frequent requests: {self.id_top_10_most_frequent_requests}" \
+        return f"Top most frequent requests: {self.id_top_most_frequent_requests_most_frequent_requests}" \
                f"Url: {self.url_requests}" \
                f"Count: {self.lines}"
 
-    id_top_10_most_frequent_requests = Column(Integer, primary_key=True, autoincrement=True)
+    id_top_most_frequent_requests_most_frequent_requests = Column(Integer, primary_key=True, autoincrement=True)
     url_requests = Column(String(1000), nullable=False)
     lines = Column(Integer)
 
@@ -71,4 +71,5 @@ class TopServerErrorsModel(Base):
 
     id_server_error = Column(Integer, primary_key=True, autoincrement=True)
     count_server_error = Column(Integer)
+    status_server_error = Column(String(4), nullable=False)
     IP_server_error = Column(String(16), nullable=False)
