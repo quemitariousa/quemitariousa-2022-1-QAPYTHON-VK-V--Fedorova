@@ -29,6 +29,7 @@ class HttpClient:
                 print(f'received data: {data}')
                 total_data.append(data.decode())
             else:
+                self.client.close()
                 break
         # ^решение кривое, не делайте так
         data = ''.join(total_data).splitlines()
