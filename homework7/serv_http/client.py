@@ -22,17 +22,14 @@ class HttpClient:
 
     def client_recv(self):
         total_data = []
-        try:
-            while True:
-                # читаем данные из сокета до тех пор пока они там есть
-                data = self.client.recv(4096)
-                if data:
-                    print(f'received data: {data}')
-                    total_data.append(data.decode())
-                else:
-                    break
-        except timeout:
-            pass
+        while True:
+            # читаем данные из сокета до тех пор пока они там есть
+            data = self.client.recv(4096)
+            if data:
+                print(f'received data: {data}')
+                total_data.append(data.decode())
+            else:
+                break
         # ^решение кривое, не делайте так
         data = ''.join(total_data).splitlines()
         return data
@@ -77,3 +74,4 @@ class HttpClient:
         self.client.send(request.encode())
         resp = self.client_recv()
         return resp
+
