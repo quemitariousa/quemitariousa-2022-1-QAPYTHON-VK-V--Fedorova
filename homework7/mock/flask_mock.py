@@ -9,6 +9,7 @@ COUNTER_OF_DOG = {'Lera': 1,
 
 app = Flask(__name__)
 
+
 @app.route('/create_user', methods=['POST'])
 def create_user():
     name = json.loads(request.data)['name']
@@ -29,7 +30,6 @@ def get_user_count_dog(name):
         return jsonify(data), 200
     else:
         return jsonify(f'Dog for user "{name}" not found'), 405
-
 
 
 @app.route('/change_dog/<name>', methods=['PUT'])

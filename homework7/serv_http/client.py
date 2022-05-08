@@ -1,6 +1,5 @@
 import json
 import socket
-import time
 
 from urllib3.util import timeout
 
@@ -16,8 +15,8 @@ class HttpClient:
 
     def connect(self):
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client.settimeout(0.1)
-        client.connect((self.host, int(self.port)))
+        client.settimeout(0.5)
+        client.connect((self.host, self.port))
         self.client = client
         return client
 
